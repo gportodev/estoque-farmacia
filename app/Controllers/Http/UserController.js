@@ -3,6 +3,19 @@
 const User = use('App/Models/User')
 
 class UserController {
+
+  async index () {
+    const usuarios = await User.all()
+
+    return usuarios
+  }
+
+  async show ({ params }) {
+    const usuarios = await User.findOrFail(params.id)
+
+    return usuarios
+  }
+
   async store({ request }) {
     const dados = request.only(['username', 'email', 'password']);
 
@@ -14,7 +27,7 @@ class UserController {
 
   async update({ params, request}) {
 
-    const dados = request.only(['username']);
+    const dados = request.only(['username', 'email', 'password']);
 
     const user = await User.findOrFail(params.id)
   
