@@ -18,14 +18,16 @@ const Route = use('Route')
 
 Route.post("/authenticate", "AuthController.authenticate");
 
+Route.post("/link", "UserController.link").middleware(['auth'])
 
 //Users
 Route.group(() => {
   Route.resource("users", "UserController")
     .middleware(new Map([ 
-      [['update'],['auth']] 
+      [['update','destroy'], ['auth']] 
     ]))
 })
+
 
 //Produtos
 Route.group(() => {

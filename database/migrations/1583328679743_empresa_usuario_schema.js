@@ -7,10 +7,10 @@ class EmpresaUsuarioSchema extends Schema {
   up () {
     this.create('empresa_usuarios', (table) => {
       table.increments()
+      table.unique(['idEmpresa', 'idUsuario'])
       table
        .integer('idEmpresa')
        .notNullable()
-       .unique()
        .references('id')
        .inTable('empresas')
        .onUpdate('CASCADE')
@@ -18,7 +18,6 @@ class EmpresaUsuarioSchema extends Schema {
       table
         .integer('idUsuario')
         .notNullable()
-        .unique()
         .references('id')
         .inTable('users')
         .onUpdate('CASCADE')
