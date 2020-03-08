@@ -1,5 +1,7 @@
 'use strict'
 
+const Antl = use('Antl')
+
 class Empresa {
   get validateAll () {
     return true
@@ -16,6 +18,10 @@ class Empresa {
       cidade :'required',
       estado :'required'
     }
+  }
+
+  get messages () {
+    return Antl.list('validation')
   }
 }
 
