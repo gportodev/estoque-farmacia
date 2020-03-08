@@ -2,8 +2,6 @@
 
 const User = use('App/Models/User')
 
-const Empresa_usuario = use('App/Models/EmpresaUsuario')
-
 class UserController {
 
   async index () {
@@ -20,12 +18,12 @@ class UserController {
 
   async store({ request }) {
 
-    const dados = request.only(['username', 'email', 'password']);
+    const dados = request.only(['username','email','password'])
+    
+    const user = await User.create(dados)
 
-    const user = await User.create(dados);
+    return user
 
-
-    return user;
   }
 
   async update({ params, request}) {
@@ -46,15 +44,6 @@ class UserController {
     const user = await User.findOrFail(params.id)
 
     await user.delete()
-  }
-
-  async link({ request }) {
-
-    const dados = request.only(['idEmpresa', 'idUsuario'])
-
-    const vinculo = await Empresa_usuario.create(dados);
-
-    return vinculo
   }
 }
 

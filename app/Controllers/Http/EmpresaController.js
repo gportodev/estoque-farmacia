@@ -40,7 +40,10 @@ class EmpresaController {
     return empresa
   }
 
-  async destroy ({ params, request, response }) {
+  async destroy ({ params }) {
+    const empresa = await Empresa.findOrFail(params.id)
+
+    await empresa.delete();
   }
 }
 
