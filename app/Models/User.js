@@ -1,9 +1,7 @@
 'use strict'
 
-/** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
-/** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
 
 class User extends Model {
@@ -23,10 +21,18 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  empresas () {
-    return this
-      .belongsToMany('App/Models/Empresa')
+  static get traits () {
+    return [
+      '@provider:Adonis/Acl/HasRole',
+      '@provider:Adonis/Acl/HasPermission'
+    ]
   }
+
+  empresas () {
+    return this.belongsToMany('App/Models/Empresa')
+  }
+
+  
 }
 
 module.exports = User

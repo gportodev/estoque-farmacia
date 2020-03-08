@@ -40,7 +40,10 @@ class EstoqueController {
   }
 
  
-  async destroy ({ params, request, response }) {
+  async destroy ({ params }) {
+    const estoque = await Estoque.findOrFail(params.id)
+
+    await estoque.delete();
   }
 }
 

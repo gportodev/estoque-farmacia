@@ -3,18 +3,40 @@ const Route = use('Route')
 
 //Users
 
-Route.post('users', 'UserController.store').validator('User')
+
+
+
 
 Route.group(() => {
+  Route.resource('/users', 'UserController')
+  .apiOnly()
+  .except(['index', 'show'])
 
-  Route.get('users', 'UserController.index')
-  Route.get('users/:id', 'UserController.show')
+  Route.post('/users', 'UserController.store').validator('User')
 
-  Route.put('users/:id', 'UserController.update')
+}).middleware(['auth', 'is:(administrator || moderator'])
 
-  Route.delete('users/:id', 'UserController.destroy')
+Route.get('/users', 'UserController.index')
+  .middleware(['auth', 'can:read_users'])
 
-}).middleware(['auth'])
+Route.get('/users/:id', 'UserController.show')
+  .middleware(['auth', 'can:read_users'])
+
+//-----------------------------------------------------------------------------//
+
+//Permissions
+
+Route.resource('permissions', 'PermissionController')
+  .apiOnly()
+  .middleware('auth')
+
+//-----------------------------------------------------------------------------//
+
+//Roles
+
+Route.resource('roles', 'RoleController')
+  .apiOnly()
+  .middleware('auth')
 
 //-----------------------------------------------------------------------------//
 
