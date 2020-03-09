@@ -18,12 +18,12 @@ class UserController {
 
   async store({ request }) {
 
-    const { permissions, roles, ...data } = request.only([
+    const { permissions, roles,...data } = request.only([
       'username',
       'email',
       'password',
       'permissions',
-      'roles'
+      'roles',
     ])
     
     const user = await User.create(data)

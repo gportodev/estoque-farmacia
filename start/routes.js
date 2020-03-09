@@ -1,6 +1,10 @@
 'use strict'
 const Route = use('Route')
 
+//-----------------------------------------------------------------------------//
+
+//Users
+
 Route.group(() => {
   Route.resource('/users', 'UserController')
   .apiOnly()
