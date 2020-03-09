@@ -1,26 +1,14 @@
 'use strict'
 const Route = use('Route')
 
-//Users
-
-
-
-
-
 Route.group(() => {
   Route.resource('/users', 'UserController')
   .apiOnly()
-  .except(['index', 'show'])
+  .except(['store'])
 
   Route.post('/users', 'UserController.store').validator('User')
 
-}).middleware(['auth', 'is:(administrator || moderator'])
-
-Route.get('/users', 'UserController.index')
-  .middleware(['auth', 'can:read_users'])
-
-Route.get('/users/:id', 'UserController.show')
-  .middleware(['auth', 'can:read_users'])
+}).middleware(['auth', 'is:(farmaceutico)'])
 
 //-----------------------------------------------------------------------------//
 
@@ -28,7 +16,7 @@ Route.get('/users/:id', 'UserController.show')
 
 Route.resource('permissions', 'PermissionController')
   .apiOnly()
-  .middleware('auth')
+  .middleware(['auth', 'is:(farmaceutico)'])
 
 //-----------------------------------------------------------------------------//
 
@@ -36,7 +24,7 @@ Route.resource('permissions', 'PermissionController')
 
 Route.resource('roles', 'RoleController')
   .apiOnly()
-  .middleware('auth')
+  .middleware(['auth', 'is:(farmaceutico)'])
 
 //-----------------------------------------------------------------------------//
 
@@ -54,47 +42,46 @@ Route.put('passwords', 'ForgotPasswordController.update').validator('ResetPasswo
 //-----------------------------------------------------------------------------//
 
 //Produtos
-Route.get('produtos', 'ProdutoController.index')
-Route.get('produtos/:id', 'ProdutoController.show')
 
 Route.group(() => {
+  Route.resource('/produtos', 'ProdutoController')
+  .apiOnly()
+  .except(['store'])
 
   Route.post('produtos', 'ProdutoController.store').validator('Produto')
 
-  Route.put('produtos/:id', 'ProdutoController.update')
-
-  Route.delete('produtos/:id', 'ProdutoController.destroy')
-}).middleware(['auth'])
+}).middleware(['auth', 'is:(farmaceutico)'])
 
 //-----------------------------------------------------------------------------//
 
 //Empresas
-Route.get('empresas', 'EmpresaController.index')
-Route.get('empresas/:id', 'EmpresaController.show')
-
 Route.group(() => {
+  Route.resource('/empresas', 'EmpresaController')
+  .apiOnly()
+  .except(['store'])
 
   Route.post('empresas', 'EmpresaController.store').validator('Empresa')
 
-  Route.put('empresas/:id', 'EmpresaController.update')
-
-  Route.delete('empresas/:id', 'EmpresaController.destroy')
-}).middleware(['auth'])
+}).middleware(['auth', 'is:(farmaceutico)'])
 
 //-----------------------------------------------------------------------------//
 
 //Estoques
-Route.get('estoques', 'EstoqueController.index')
-Route.get('estoques/:id', 'EstoqueController.show')
+
+Route.get('/estoques', 'EstoqueController.index')
+  .middleware(['auth', 'can:read_estoques'])
+
+Route.get('/estoques/:id', 'EstoqueController.show')
+  .middleware(['auth', 'can:read_estoques'])
 
 Route.group(() => {
+  Route.resource('/estoques', 'EstoqueController')
+  .apiOnly()
+  .except(['index', 'show', 'store'])
   
   Route.post('estoques', 'EstoqueController.store').validator('Estoque')
 
-  Route.put('estoques/:id', 'EstoqueController.update')
-
-  Route.delete('estoques/:id', 'EstoqueController.destroy')
-}).middleware(['auth'])
+}).middleware(['auth', 'is:(farmaceutico)'])
 
 // password_confirmation -> reset da senha, cria user
 
