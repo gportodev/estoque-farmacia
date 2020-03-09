@@ -1,12 +1,9 @@
-'use strict'
-
-const Model = use('Model')
+const Model = use('Model');
 
 class Estoque extends Model {
-  produtos () {
-    return this
-      .belongsToMany('App/Models/Produto')
+  produtos() {
+    return this.belongsToMany('App/Models/Produto');
   }
 }
 
-module.exports = Estoque
+module.exports = Estoque;

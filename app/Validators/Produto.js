@@ -1,23 +1,21 @@
-'use strict'
-
-const Antl = use('Antl')
+const Antl = use('Antl');
 
 class Produto {
-  get validateAll () {
-    return true
+  get validateAll() {
+    return true;
   }
 
-  get rules () {
+  get rules() {
     return {
       nome: 'required',
       descricao: 'required',
-      unidade: 'required'
-    }
+      unidade: 'required',
+    };
   }
 
-  get messages () {
-    return Antl.list('validation')
+  get messages() {
+    return Antl.list('validation');
   }
 }
 
-module.exports = Produto
+module.exports = Produto;

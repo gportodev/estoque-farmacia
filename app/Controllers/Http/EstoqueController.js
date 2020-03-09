@@ -1,50 +1,43 @@
-'use strict'
-
-const Estoque = use('App/Models/Estoque')
+const Estoque = use('App/Models/Estoque');
 
 class EstoqueController {
-  
-  async index () {
-    const estoques = await Estoque.all()
-    
-    return estoques
+  async index() {
+    const estoques = await Estoque.all();
+
+    return estoques;
   }
 
+  async store({ request }) {
+    const dados = request.all();
 
-  async store ({ request }) {
-    const dados = request.all()
-    
     const estoque = await Estoque.create(dados);
 
-    return estoque
+    return estoque;
   }
 
+  async show({ params }) {
+    const estoque = await Estoque.findOrFail(params.id);
 
-  async show ({ params }) {
-    const estoque = await Estoque.findOrFail(params.id)
-
-    return estoque
+    return estoque;
   }
 
- 
-  async update ({ params, request }) {
-    const dados = request.all()
+  async update({ params, request }) {
+    const dados = request.all();
 
-    const estoque = await Estoque.findOrFail(params.id)
+    const estoque = await Estoque.findOrFail(params.id);
 
-    estoque.merge(dados)
+    estoque.merge(dados);
 
-    await estoque.save()
+    await estoque.save();
 
-    return estoque
+    return estoque;
   }
 
- 
-  async destroy ({ params }) {
-    const estoque = await Estoque.findOrFail(params.id)
+  async destroy({ params }) {
+    const estoque = await Estoque.findOrFail(params.id);
 
     await estoque.delete();
   }
 }
 
-module.exports = EstoqueController
+module.exports = EstoqueController;

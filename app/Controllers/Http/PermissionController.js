@@ -1,39 +1,37 @@
-'use strict'
-
-const Permission = use('Permission')
+const Permission = use('Permission');
 
 class PermissionController {
   async index() {
-    const permissions = await Permission.all()
+    const permissions = await Permission.all();
 
-    return permissions
+    return permissions;
   }
 
   async store({ request }) {
-    const data = request.only(['name', 'slug', 'description'])
+    const data = request.only(['name', 'slug', 'description']);
 
-    const permission = await Permission.create(data)
+    const permission = await Permission.create(data);
 
-    return permission
+    return permission;
   }
 
   async update({ request, params }) {
-    const data = request.only(['name', 'slug', 'description'])
+    const data = request.only(['name', 'slug', 'description']);
 
-    const permission = await Permission.findOrFail(params.id)
+    const permission = await Permission.findOrFail(params.id);
 
-    permission.merge(data)
+    permission.merge(data);
 
-    await permission.save()
+    await permission.save();
 
-    return permission
+    return permission;
   }
 
   async destroy({ params }) {
-    const permission = await Permission.findOrFail(params.id)
+    const permission = await Permission.findOrFail(params.id);
 
-    permission.delete()
+    permission.delete();
   }
 }
 
-module.exports = PermissionController
+module.exports = PermissionController;

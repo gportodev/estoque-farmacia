@@ -1,24 +1,22 @@
-'use strict'
-
-const Antl = use('Antl')
+const Antl = use('Antl');
 
 class Estoque {
-  get validateAll () {
-    return true
+  get validateAll() {
+    return true;
   }
 
-  get rules () {
+  get rules() {
     return {
       idEmpresa: 'required',
       idProduto: 'required',
       quantidade: 'required',
-      valor_unit: 'required'
-    }
+      valor_unit: 'required',
+    };
   }
 
-  get messages () {
-    return Antl.list('validation')
+  get messages() {
+    return Antl.list('validation');
   }
 }
 
-module.exports = Estoque
+module.exports = Estoque;

@@ -1,9 +1,5 @@
-'use strict'
+const Model = use('Model');
 
-const Model = use('Model')
+class EmpresaUsuario extends Model {}
 
-class EmpresaUsuario extends Model {
-  
-}
-
-module.exports = EmpresaUsuario
+module.exports = EmpresaUsuario;

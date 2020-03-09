@@ -1,48 +1,46 @@
-'use strict'
-
-const EmpresaUsuario = use('App/Models/EmpresaUsuario')
+const EmpresaUsuario = use('App/Models/EmpresaUsuario');
 
 class EmpresaUsuarioController {
-  async index () {
-    const empresaUsuario = await EmpresaUsuario.all()
+  async index() {
+    const empresaUsuario = await EmpresaUsuario.all();
 
-    return empresaUsuario
+    return empresaUsuario;
   }
 
-  async show ({ params }) {
-    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id)
+  async show({ params }) {
+    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id);
 
-    return empresaUsuario
+    return empresaUsuario;
   }
 
-  async store ({ request }) {
-    const { idEmpresa, idUsuario } = request.only(['idEmpresa', 'idUsuario'])
+  async store({ request }) {
+    const { idEmpresa, idUsuario } = request.only(['idEmpresa', 'idUsuario']);
 
     const empresaUsuario = await EmpresaUsuario.create({
       idEmpresa,
-      idUsuario
-    })
+      idUsuario,
+    });
 
-    return empresaUsuario
+    return empresaUsuario;
   }
 
-  async update ({ params, request }) {
-    const dados = request.all()
+  async update({ params, request }) {
+    const dados = request.all();
 
-    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id)
+    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id);
 
-    empresaUsuario.merge(dados)
+    empresaUsuario.merge(dados);
 
-    await empresaUsuario.save()
+    await empresaUsuario.save();
 
-    return empresaUsuario
+    return empresaUsuario;
   }
 
-  async destroy ({ params }) {
-    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id)
+  async destroy({ params }) {
+    const empresaUsuario = await EmpresaUsuario.findOrFail(params.id);
 
-    await empresaUsuario.delete()
+    await empresaUsuario.delete();
   }
 }
 
-module.exports = EmpresaUsuarioController
+module.exports = EmpresaUsuarioController;

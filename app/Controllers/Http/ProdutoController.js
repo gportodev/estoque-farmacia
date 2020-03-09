@@ -1,46 +1,43 @@
-'use strict'
-const Produto = use('App/Models/Produto')
+const Produto = use('App/Models/Produto');
 
 class ProdutoController {
+  async index() {
+    const produtos = await Produto.all();
 
-  async index () {
-    const produtos = await Produto.all()
-
-    return produtos
+    return produtos;
   }
 
-  async store ({ request }) {
-    const dados = request.all()
+  async store({ request }) {
+    const dados = request.all();
 
     const produto = await Produto.create(dados);
 
-    return produto
+    return produto;
   }
 
-  async show ({ params }) {
-    const produto = await Produto.findOrFail(params.id)
+  async show({ params }) {
+    const produto = await Produto.findOrFail(params.id);
 
-    return produto
+    return produto;
   }
 
-  async update ({ params, request }) {
-    const dados = request.all()
+  async update({ params, request }) {
+    const dados = request.all();
 
-    const produto = await Produto.findOrFail(params.id)
+    const produto = await Produto.findOrFail(params.id);
 
-    produto.merge(dados)
+    produto.merge(dados);
 
-    await produto.save()
+    await produto.save();
 
-    return produto
+    return produto;
   }
 
-  async destroy ({ params }) {
-    const produto = await Produto.findOrFail(params.id)
+  async destroy({ params }) {
+    const produto = await Produto.findOrFail(params.id);
 
     await produto.delete();
-
   }
 }
 
-module.exports = ProdutoController
+module.exports = ProdutoController;

@@ -1,50 +1,43 @@
-'use strict'
-
-/** @typedef {import('@adonisjs/framework/src/Request')} Request */
-/** @typedef {import('@adonisjs/framework/src/Response')} Response */
-/** @typedef {import('@adonisjs/framework/src/View')} View */
-
-const Empresa = use('App/Models/Empresa')
+const Empresa = use('App/Models/Empresa');
 
 class EmpresaController {
-  
-  async index () {
-    const empresas = await Empresa.all()
+  async index() {
+    const empresas = await Empresa.all();
 
-    return empresas
+    return empresas;
   }
 
-  async store ({ request }) {
-    const dados = request.all()
+  async store({ request }) {
+    const dados = request.all();
 
     const empresa = await Empresa.create(dados);
 
-    return empresa
+    return empresa;
   }
 
-  async show ({ params }) {
-    const empresa = await Empresa.findOrFail(params.id)
+  async show({ params }) {
+    const empresa = await Empresa.findOrFail(params.id);
 
-    return empresa
+    return empresa;
   }
 
-  async update ({ params, request }) {
-    const dados = request.all()
+  async update({ params, request }) {
+    const dados = request.all();
 
-    const empresa = await Empresa.findOrFail(params.id)
+    const empresa = await Empresa.findOrFail(params.id);
 
-    empresa.merge(dados)
+    empresa.merge(dados);
 
-    await empresa.save()
+    await empresa.save();
 
-    return empresa
+    return empresa;
   }
 
-  async destroy ({ params }) {
-    const empresa = await Empresa.findOrFail(params.id)
+  async destroy({ params }) {
+    const empresa = await Empresa.findOrFail(params.id);
 
     await empresa.delete();
   }
 }
 
-module.exports = EmpresaController
+module.exports = EmpresaController;
