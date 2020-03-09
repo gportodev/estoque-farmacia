@@ -3,6 +3,16 @@ const Route = use('Route')
 
 //-----------------------------------------------------------------------------//
 
+//EmpresaUsuario
+
+Route.group(() => {
+  Route.resource('/empresa_usuarios', 'EmpresaUsuarioController')
+  .apiOnly()  
+
+}).middleware(['auth', 'is:(farmaceutico)'])
+
+//-----------------------------------------------------------------------------//
+
 //Users
 
 Route.group(() => {
