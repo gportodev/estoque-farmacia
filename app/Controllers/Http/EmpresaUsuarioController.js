@@ -3,9 +3,9 @@
 const EmpresaUsuario = use('App/Models/EmpresaUsuario')
 
 class EmpresaUsuarioController {
-  async index() {
+  async index () {
     const empresaUsuario = await EmpresaUsuario.all()
-    
+
     return empresaUsuario
   }
 
@@ -15,16 +15,13 @@ class EmpresaUsuarioController {
     return empresaUsuario
   }
 
-  async store({ request }) {
-    
+  async store ({ request }) {
     const { idEmpresa, idUsuario } = request.only(['idEmpresa', 'idUsuario'])
 
     const empresaUsuario = await EmpresaUsuario.create({
       idEmpresa,
       idUsuario
     })
-
-    
 
     return empresaUsuario
   }
@@ -44,8 +41,7 @@ class EmpresaUsuarioController {
   async destroy ({ params }) {
     const empresaUsuario = await EmpresaUsuario.findOrFail(params.id)
 
-    await empresaUsuario.delete();
-
+    await empresaUsuario.delete()
   }
 }
 
